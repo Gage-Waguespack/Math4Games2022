@@ -6,12 +6,12 @@ namespace MathForGames
 {
     class Actor
     {
-        public void start()
+        public void Start()
         {
 
         }
 
-        public void update()
+        public void Update()
         {
 
         }
