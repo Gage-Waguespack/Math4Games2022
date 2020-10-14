@@ -8,6 +8,7 @@ namespace MathForGames
     {
         private char _icon = 'a';
         private int _x = 0;
+        private int _y = 0;
         public void Start()
         {
 
@@ -15,15 +16,30 @@ namespace MathForGames
 
         public void Update()
         {
-            if (Game.CheckKey(ConsoleKey.D))
+            ConsoleKey keyPressed = Game.GetNextKey();
+
+            switch(keyPressed)
             {
-                _x++;
+                case ConsoleKey.A:
+                    _x--;
+                    break;
+                case ConsoleKey.D:
+                    _x++;
+                    break;
+                case ConsoleKey.W:
+                    _y--;
+                    break;
+                case ConsoleKey.S:
+                    _y++;
+                    break;
             }
+            _x = Math.Clamp(_x, 0, Console.WindowWidth-1);
+            _y = Math.Clamp(_y, 0, Console.WindowHeight-1);
         }
 
         public void Draw()
         {
-            Console.SetCursorPosition(_x, 0);
+            Console.SetCursorPosition(_x, _y);
             Console.Write(_icon);
         }
 

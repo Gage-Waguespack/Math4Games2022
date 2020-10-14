@@ -17,23 +17,21 @@ namespace MathForGames
             _gameOver = value;
         }
 
-        //Return whether or not the specefied ConsoleKey is pressed
-        public static bool CheckKey(ConsoleKey key)
+        public static ConsoleKey GetNextKey()
         {
-            if (Console.KeyAvailable)
+            //If the user hasn't pressed a key return
+            if(!Console.KeyAvailable)
             {
-                if (Console.ReadKey(true).Key == key)
-                {
-                    return true;
-                }
+                return 0;
             }
-
-            return false;
+            //Return the key that was pressed
+            return Console.ReadKey(true).Key;
         }
 
         //Called when the game begins. Use this for initialization.
         public void Start()
         {
+            Console.CursorVisible = false;
             _scene = new Scene();
             Actor actor = new Actor();
             _scene.AddActor(actor);
@@ -72,7 +70,7 @@ namespace MathForGames
                 Draw();
                 while (Console.KeyAvailable) 
                     Console.ReadKey(true);
-                Thread.Sleep(50);
+                Thread.Sleep(250);
             }
 
             End();
