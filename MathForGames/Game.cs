@@ -33,7 +33,7 @@ namespace MathForGames
         {
             Console.CursorVisible = false;
             _scene = new Scene();
-            Actor actor = new Actor();
+            Actor actor = new Actor(0,0, 'a', ConsoleColor.Magenta);
             _scene.AddActor(actor);
         }
 

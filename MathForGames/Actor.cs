@@ -1,14 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MathLibrary;
 
 namespace MathForGames
 {
     class Actor
     {
-        private char _icon = 'a';
-        private int _x = 0;
-        private int _y = 0;
+        private char _icon = ' ';
+        private Vector2 _position;
+        private Vector2 _velocity;
+        private ConsoleColor _color;
+        
+
+
+        public Actor(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.White)
+        {
+            _icon = icon;
+            _position = new Vector2(x, y);
+            _velocity = new Vector2();
+            _color = color;
+        }
+
         public void Start()
         {
 
@@ -21,25 +34,32 @@ namespace MathForGames
             switch(keyPressed)
             {
                 case ConsoleKey.A:
-                    _x--;
+                    _velocity.X = -1;
                     break;
                 case ConsoleKey.D:
-                    _x++;
+                    _velocity.X = 1;
                     break;
                 case ConsoleKey.W:
-                    _y--;
+                    _velocity.Y = -1;
                     break;
                 case ConsoleKey.S:
-                    _y++;
+                    _velocity.Y = 1;
+                    break;
+                default:
+                    _velocity.X = 0;
+                    _velocity.Y = 0;
                     break;
             }
-            _x = Math.Clamp(_x, 0, Console.WindowWidth-1);
-            _y = Math.Clamp(_y, 0, Console.WindowHeight-1);
+            _position.X += _velocity.X;
+            _position.Y += _velocity.Y;
+            _position.X = Math.Clamp(_position.X, 0, Console.WindowWidth-1);
+            _position.Y = Math.Clamp(_position.Y, 0, Console.WindowHeight-1);
         }
 
         public void Draw()
         {
-            Console.SetCursorPosition(_x, _y);
+            Console.ForegroundColor = _color;
+            Console.SetCursorPosition((int)_position.X, (int)_position.Y);
             Console.Write(_icon);
         }
 
