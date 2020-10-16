@@ -5,16 +5,7 @@ using MathLibrary;
 
 namespace MathForGames
 {
-    /// <summary>
-    /// Create a new sub class of actor that builds upon the functionality already given.
-    /// Examples:
-    /// - Create simple collision detection between players and other actors.
-    /// - Give NPC's simple AI
-    /// - Create a simple gold game. Players would need to move an actor representing a 
-    /// ball to an actor that would represent the hole. The player wins if those two actors
-    /// collide. For an added challenge, give the player the ability to switch clubs. Each
-    /// club will change the magnitude of the vector applied to the ball's position.
-    /// </summary>
+
     class Actor
     {
         protected private char _icon = ' ';
@@ -62,8 +53,7 @@ namespace MathForGames
 
         public virtual void Update()
         {
-            _position.X += _velocity.X;
-            _position.Y += _velocity.Y;
+            _position += _velocity;
             _position.X = Math.Clamp(_position.X, 0, Console.WindowWidth-1);
             _position.Y = Math.Clamp(_position.Y, 0, Console.WindowHeight-1);
         }

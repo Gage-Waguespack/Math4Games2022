@@ -4,13 +4,16 @@ using System.Text;
 
 namespace MathForGames
 {
-    class Hole : Actor
+    class Enemy : Actor
     {
-        public Hole(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.Magenta)
+        private string _name;
+        public Enemy(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.Magenta)
             : base(x, y, icon, color)
         {
 
         }
+
+
 
     }
 }

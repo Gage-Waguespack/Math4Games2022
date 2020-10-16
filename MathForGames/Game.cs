@@ -7,6 +7,18 @@ using MathForGames;
 
 namespace MathForGames
 {
+    /// <summary>
+    /// I want to make a game that has the player choose a difficulty, either easy, medium, or large.
+    /// After that I'd want each difficulty to have different amounts of enemies and I want the player
+    /// to be able to walk over an enemy and for that enemy to disappear. If there are multiple enemies
+    /// in the same position and the player is there, I want the game to end (the player will lose) 
+    /// and if the player walks over just one enemy, I want the enemy to disappear and if the player
+    /// gets rid of the all, they win.
+    /// Things I'm going to need:
+    /// - An enemy class that hold the variables for the enemies (including their movements).
+    /// - A way for the player to lose via multiple enemies.
+    /// - A way for the player to win after there are no enemies being detected.
+    /// </summary>
     class Game
     {
         private static bool _gameOver = false;
@@ -38,7 +50,7 @@ namespace MathForGames
             _scene = new Scene();
             Actor actor = new Actor(0,0, '■', ConsoleColor.Magenta);
             actor.Velocity.X = 1;
-            Player player = new Player(0, 1, '@', ConsoleColor.Cyan);
+            Player player = new Player(10, 20, '@', ConsoleColor.Cyan);
             _scene.AddActor(actor);
             _scene.AddActor(player);
         }
