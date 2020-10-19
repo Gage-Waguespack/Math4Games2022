@@ -88,6 +88,8 @@ namespace MathForGames
                 {
                     //This is where I used the flag
                     actorRemoved = true;
+                    if (_actors[i].Started)
+                        _actors[i].End();
                 }
             }
 
@@ -99,16 +101,16 @@ namespace MathForGames
 
         public virtual void Start()
         {
-            for (int i = 0; i < _actors.Length; i++)
-            {
-                _actors[i].Start();
-            }
+            Started = true;
         }
 
         public virtual void Update()
         {
             for (int i = 0; i < _actors.Length; i++)
             {
+                if (!_actors[i].Started)
+                    _actors[i].Start();
+
                 _actors[i].Update();
             }
         }
@@ -125,8 +127,11 @@ namespace MathForGames
         {
             for (int i = 0; i < _actors.Length; i++)
             {
-                _actors[i].End();
+                if (_actors[i].Started)
+                    _actors[i].End();
             }
+
+            Started = false;
         }
     }
 }

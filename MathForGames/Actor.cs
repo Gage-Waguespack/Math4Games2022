@@ -14,6 +14,7 @@ namespace MathForGames
         protected private Vector2 _velocity;
         protected private ConsoleColor _color;
         protected Color _rayColor;
+        public bool Started { get; private set; }
 
         public Vector2 Position
         {
@@ -56,7 +57,7 @@ namespace MathForGames
 
         public virtual void Start()
         {
-
+            Started = true;
         }
 
         public virtual void Update()
