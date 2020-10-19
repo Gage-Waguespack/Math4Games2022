@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Raylib_cs;
 
 namespace MathForGames
 {
@@ -8,6 +9,12 @@ namespace MathForGames
     {
         public Player(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.Magenta)
             : base(x,y,icon, color)
+        {
+
+        }
+
+        public Player(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.Magenta)
+            : base(x,y,rayColor,icon,color)
         {
 
         }
@@ -32,6 +39,12 @@ namespace MathForGames
                         break;
                     case ConsoleKey.S:
                         _velocity.Y = 1;
+                        break;
+                    case ConsoleKey.I:
+                        Game.setCurrentScene(0);
+                        break;
+                    case ConsoleKey.K:
+                        Game.setCurrentScene(1);
                         break;
                     default:
                         _velocity.X = 0;

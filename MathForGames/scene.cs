@@ -8,6 +8,7 @@ namespace MathForGames
     {
         private Actor[] _actors;
 
+        public bool Started { get; private set; }
         public Scene()
         {
             _actors = new Actor[0];
