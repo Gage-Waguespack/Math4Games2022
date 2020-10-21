@@ -26,6 +26,13 @@ namespace MathForGames
         private static Scene[] _scenes;
         private static int _currentSceneIndex;
 
+        public static int CurrentSceneIndex
+        {
+            get
+            {
+                return _currentSceneIndex;
+            }
+        }
         public static ConsoleColor DefaultColor { get; set; } = ConsoleColor.Magenta;
 
         //Static function used to set game over without an instance of game.
@@ -34,9 +41,14 @@ namespace MathForGames
             _gameOver = value;
         }
 
-        public static Scene GetScenes(int index)
+        public static Scene GetScene(int index)
         {
             return _scenes[index];
+        }
+
+        public static Scene GetCurrentScene()
+        {
+            return _scenes[_currentSceneIndex];
         }
 
         public static int AddScene(Scene scene)
@@ -143,6 +155,7 @@ namespace MathForGames
             scene1.AddActor(player);
 
             scene2.AddActor(player);
+            player.Speed = 5;
 
             int startingSceneIndex = 0;
 
@@ -156,12 +169,12 @@ namespace MathForGames
 
 
         //Called every frame.
-        public void Update()
+        public void Update(float deltaTime)
         {
             if (!_scenes[_currentSceneIndex].Started)
                 _scenes[_currentSceneIndex].Start();
 
-            _scenes[_currentSceneIndex].Update();
+            _scenes[_currentSceneIndex].Update(deltaTime);
         }
 
         //Used to display objects and other info on the screen.
@@ -192,11 +205,11 @@ namespace MathForGames
 
             while(!_gameOver && !Raylib.WindowShouldClose())
             {
-                Update();
+                float deltaTime = Raylib.GetFrameTime();
+                Update(deltaTime);
                 Draw();
                 while (Console.KeyAvailable) 
                     Console.ReadKey(true);
-                Thread.Sleep(250);
             }
 
             End();
