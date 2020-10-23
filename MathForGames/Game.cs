@@ -149,12 +149,19 @@ namespace MathForGames
             Enemy enemy2 = new Enemy(6, 0, Color.RED, '■', ConsoleColor.Magenta);
             enemy2.Velocity.Y = 1;
             Player player = new Player(10, 20, Color.BLUE, '@', ConsoleColor.Cyan);
+
+            enemy.Target = player;
+            enemy1.Target = player;
+            enemy2.Target = player;
+
             scene1.AddActor(enemy);
             scene1.AddActor(enemy1);
             scene1.AddActor(enemy2);
             scene1.AddActor(player);
 
             scene2.AddActor(player);
+            scene2.AddActor(enemy);
+
             player.Speed = 5;
 
             int startingSceneIndex = 0;
