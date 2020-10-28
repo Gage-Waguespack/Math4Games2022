@@ -12,6 +12,7 @@ namespace MathForGames
         protected char _icon = ' ';
         protected Vector2 _position;
         protected Vector2 _velocity;
+        protected Matrix3 _transform;
         protected Vector2 _facing;
         protected ConsoleColor _color;
         protected Color _rayColor;
