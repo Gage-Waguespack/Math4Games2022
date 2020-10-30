@@ -14,6 +14,12 @@ namespace MathForGames
         protected Matrix3 _transform;
         protected ConsoleColor _color;
         protected Color _rayColor;
+
+        /// <summary>
+        /// Create new matrices to transform the actors matrix. The user should be able
+        /// to translate, rotate, and scale the actor.
+        /// </summary>
+
         public bool Started { get; private set; }
 
 
