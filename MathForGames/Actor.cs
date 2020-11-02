@@ -11,7 +11,10 @@ namespace MathForGames
     {
         protected char _icon = ' ';
         protected Vector2 _velocity;
-        protected Matrix3 _transform;
+        protected Matrix3 _transform = new Matrix3();
+        private Matrix3 _tanslation = new Matrix3();
+        private Matrix3 _rotation = new Matrix3();
+        private Matrix3 _scale = new Matrix3();
         protected ConsoleColor _color;
         protected Color _rayColor;
 
@@ -91,6 +94,31 @@ namespace MathForGames
         public virtual void Start()
         {
             Started = true;
+        }
+
+        public void SetTranslate(Vector2 position)
+        {
+            _tanslation.m13 = position.X;
+            _tanslation.m23 = position.Y;
+        }
+
+        public void SetRotation(float radians)
+        {
+            _rotation.m11 = (float)Math.Cos(radians);
+            _rotation.m12 = (float)Math.Sin(radians);
+            _rotation.m21 = -(float)Math.Sin(radians);
+            _rotation.m22 = (float)Math.Cos(radians);
+        }
+
+        public void SetScale(float x, float y)
+        {
+            _scale.m11 = x;
+            _scale.m22 = y;
+        }
+
+        private void UpdateTransform()
+        {
+
         }
 
         public virtual void Update(float deltaTime)
