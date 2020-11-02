@@ -142,21 +142,19 @@ namespace MathForGames
             Scene scene2 = new Scene();
 
             //Creates Enemies in the game that the player should dodge
-            Enemy enemy = new Enemy(2, 0, Color.RED, '■', ConsoleColor.Magenta);
+            Enemy enemy = new Enemy(15, 0, Color.RED, '■', ConsoleColor.Magenta);
             enemy.Velocity.Y = 1;
-            Enemy enemy1 = new Enemy(4, 0, Color.RED, '■', ConsoleColor.Magenta);
-            enemy1.Velocity.Y = 1;
-            Enemy enemy2 = new Enemy(6, 0, Color.RED, '■', ConsoleColor.Magenta);
-            enemy2.Velocity.Y = 1;
-            Player player = new Player(10, 20, Color.BLUE, '@', ConsoleColor.Cyan);
+            Player player = new Player(15, 20, Color.BLUE, '@', ConsoleColor.Cyan);
+
+            player.SetScale(.5f, .5f);
+            enemy.SetScale(.5f, .5f);
 
             enemy.Target = player;
-            enemy1.Target = player;
-            enemy2.Target = player;
+
+            player.SetRotation(3.5f);
+            enemy.SetRotation(.5f);
 
             scene1.AddActor(enemy);
-            scene1.AddActor(enemy1);
-            scene1.AddActor(enemy2);
             scene1.AddActor(player);
 
             scene2.AddActor(player);

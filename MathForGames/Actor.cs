@@ -12,7 +12,7 @@ namespace MathForGames
         protected char _icon = ' ';
         protected Vector2 _velocity;
         protected Matrix3 _transform = new Matrix3();
-        private Matrix3 _tanslation = new Matrix3();
+        private Matrix3 _translation = new Matrix3();
         private Matrix3 _rotation = new Matrix3();
         private Matrix3 _scale = new Matrix3();
         protected ConsoleColor _color;
@@ -32,11 +32,6 @@ namespace MathForGames
             { 
                 return new Vector2(_transform.m11, _transform.m21); 
             }
-            set
-            {
-                _transform.m11 = value.X;
-                _transform.m21 = value.Y;
-            }
         }
 
         public Vector2 Position
@@ -47,8 +42,8 @@ namespace MathForGames
             }
             set
             {
-                _transform.m13 = value.X;
-                _transform.m23 = value.Y;
+                _translation.m13 = value.X;
+                _translation.m23 = value.Y;
             }
         }
 
@@ -72,23 +67,12 @@ namespace MathForGames
             Position = new Vector2(x, y);
             _velocity = new Vector2();
             _color = color;
-            Forward = new Vector2(1, 0);
         }
 
         public Actor(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : this(x,y,icon,color)
         {
             _rayColor = rayColor;
-        }
-
-        //Updates the actors forward vector to be 
-        //the last direction it moved in.
-        private void UpdateFacing()
-        {
-            if (Velocity.Magnitude <= 0)
-                return;
-
-            Forward = Velocity.Normalized;
         }
 
         public virtual void Start()
@@ -98,8 +82,8 @@ namespace MathForGames
 
         public void SetTranslate(Vector2 position)
         {
-            _tanslation.m13 = position.X;
-            _tanslation.m23 = position.Y;
+            _translation.m13 = position.X;
+            _translation.m23 = position.Y;
         }
 
         public void SetRotation(float radians)
@@ -112,18 +96,18 @@ namespace MathForGames
 
         public void SetScale(float x, float y)
         {
-            _scale.m11 = x;
-            _scale.m22 = y;
+            _scale.m12 = x;
+            _scale.m21 = y;
         }
 
         private void UpdateTransform()
         {
-
+            _transform = (_translation * _rotation * _scale);
         }
 
         public virtual void Update(float deltaTime)
         {
-            UpdateFacing();
+            UpdateTransform();
             Position.X = Math.Clamp(Position.X, 0, Console.WindowWidth-1);
             Position.Y = Math.Clamp(Position.Y, 0, Console.WindowHeight-1);
             Position += _velocity * deltaTime;
