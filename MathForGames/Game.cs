@@ -100,7 +100,7 @@ namespace MathForGames
             return sceneRemoved;
         }
 
-        public static void setCurrentScene(int index)
+        public static void SetCurrentScene(int index)
         {
             if (index < 0 || index >= _scenes.Length)
                 return;
@@ -142,17 +142,16 @@ namespace MathForGames
             Scene scene2 = new Scene();
 
             //Creates Enemies in the game that the player should dodge
-            Enemy enemy = new Enemy(15, 0, Color.RED, '■', ConsoleColor.Magenta);
-            enemy.Velocity.Y = 1;
-            Player player = new Player(15, 20, Color.BLUE, '@', ConsoleColor.Cyan);
+            Enemy enemy = new Enemy(15, 3, Color.RED, '■', ConsoleColor.Magenta);
+            Player player = new Player(15, 11, Color.BLUE, '@', ConsoleColor.Cyan);
 
             player.SetScale(.5f, .5f);
             enemy.SetScale(.5f, .5f);
 
             enemy.Target = player;
 
-            player.SetRotation(3.5f);
-            enemy.SetRotation(.5f);
+            player.SetRotation(2.06f);
+            enemy.SetRotation(5.2f);
 
             scene1.AddActor(enemy);
             scene1.AddActor(player);
@@ -167,7 +166,7 @@ namespace MathForGames
             startingSceneIndex = AddScene(scene1);
             AddScene(scene2);
 
-            setCurrentScene(startingSceneIndex);
+            SetCurrentScene(startingSceneIndex);
 
 
         }
@@ -186,7 +185,6 @@ namespace MathForGames
         public void Draw()
         {
             Raylib.BeginDrawing();
-
             Raylib.ClearBackground(Color.BLACK);
             Console.Clear();
             _scenes[_currentSceneIndex].Draw();

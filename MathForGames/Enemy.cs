@@ -35,7 +35,7 @@ namespace MathForGames
             if (Target == null)
                 return false;
             //Find the vector representing the distnace between the actor and its target
-            Vector2 direction = Target.Position - Position;
+            Vector2 direction = Target.LocalPosition - LocalPosition;
             //Get the magnitude of the distance vector
             float distance = direction.Magnitude;
             //Use the inverse cosine to find the angle of the dot product in radians
@@ -63,7 +63,7 @@ namespace MathForGames
 
         public override void Draw()
         {
-            _sprite.Draw(_transform);
+            _sprite.Draw(_localTransform);
             base.Draw();
         }
     }
