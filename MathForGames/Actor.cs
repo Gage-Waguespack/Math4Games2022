@@ -20,10 +20,7 @@ namespace MathForGames
         protected Color _rayColor;
         protected Actor _parent;
         protected Actor[] _children = new Actor[0];
-
-        /// <summary>
-        /// Create a "Solar System" using matrix heirarchy.
-        /// </summary>
+        private float _collisionRadius;
 
         public bool Started { get; private set; }
 
@@ -84,8 +81,10 @@ namespace MathForGames
             _rayColor = rayColor;
         }
 
-        public void AddChild(Actor child)
+        public bool AddChild(Actor child)
         {
+            if (child == null)
+                return false;
             Actor[] tempArray = new Actor[_children.Length + 1];
 
             for (int i = 0; i < _children.Length; i++)
@@ -96,6 +95,7 @@ namespace MathForGames
             tempArray[_children.Length] = child;
             _children = tempArray;
             child._parent = this;
+            return true;
         }
 
         public bool RemoveChild(Actor child)
@@ -129,6 +129,26 @@ namespace MathForGames
         public virtual void Start()
         {
             Started = true;
+        }
+
+        /// <summary>
+        /// Checks to see if this actor overlaps another.
+        /// </summary>
+        /// <param name="other">The actor that this actor is checking collision against</param>
+        /// <returns></returns>
+        public bool CheckCollision(Actor other)
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// Called whenever a collision occurs between the actor and another.
+        /// use this to define game logic for this actors collision.
+        /// </summary>
+        /// <param name="other"></param>
+        public virtual void OnCollision(Actor other)
+        {
+
         }
 
         public void SetTranslate(Vector2 position)
