@@ -145,14 +145,17 @@ namespace MathForGames
             Enemy enemy = new Enemy(15, 3, Color.RED, '■', ConsoleColor.Magenta);
             Player player = new Player(15, 11, Color.BLUE, '@', ConsoleColor.Cyan);
 
-            player.SetScale(.5f, .5f);
-            enemy.SetScale(.5f, .5f);
+            player.SetScale(1f, 1f);
+            enemy.SetScale(1f, 1f);
 
             enemy.Target = player;
 
-            player.SetRotation(2.06f);
-            enemy.SetRotation(5.2f);
+            player.SetRotation(1.5707f);
+            enemy.SetRotation(-1.5707f);
 
+            
+
+            player.AddChild(enemy);
             scene1.AddActor(enemy);
             scene1.AddActor(player);
 

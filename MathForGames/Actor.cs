@@ -11,7 +11,7 @@ namespace MathForGames
     {
         protected char _icon = ' ';
         protected Vector2 _velocity;
-        protected Matrix3 _globalTransform;
+        protected Matrix3 _globalTransform = new Matrix3();
         protected Matrix3 _localTransform = new Matrix3();
         private Matrix3 _translation = new Matrix3();
         private Matrix3 _rotation = new Matrix3();
@@ -32,6 +32,7 @@ namespace MathForGames
             }
         }
 
+        //defines the world position using the global transform.
         public Vector2 WorldPosition
         {
             get
@@ -167,42 +168,49 @@ namespace MathForGames
 
         public void SetScale(float x, float y)
         {
-            _scale.m12 = x;
-            _scale.m21 = y;
+            _scale.m11 = x;
+            _scale.m22 = y;
         }
 
         private void UpdateTransform()
         {
             _localTransform = _translation * _rotation * _scale;
+            if (_parent == null)
+            {
+                _globalTransform = _localTransform * Game.GetCurrentScene().World;
+            }
+            else
+            {
+                _globalTransform = _localTransform * _parent._globalTransform; 
+            }
         }
 
         public virtual void Update(float deltaTime)
         {
             UpdateTransform();
-            LocalPosition.X = Math.Clamp(LocalPosition.X, 0, Console.WindowWidth-1);
-            LocalPosition.Y = Math.Clamp(LocalPosition.Y, 0, Console.WindowHeight-1);
             LocalPosition += _velocity * deltaTime;
         }
 
         public virtual void Draw()
         {
-            Raylib.DrawText(_icon.ToString(), (int)(LocalPosition.X * 32), (int)(LocalPosition.Y * 32), 32, _rayColor);
+            //
+            Raylib.DrawText(_icon.ToString(), (int)(WorldPosition.X * 32), (int)(WorldPosition.Y * 32), 32, _rayColor);
             Raylib.DrawLine(
-                (int)(LocalPosition.X * 32),
-                (int)(LocalPosition.Y * 32),
-                (int)((LocalPosition.X + Forward.X) * 32),
-                (int)((LocalPosition.Y + Forward.Y) * 32),
+                (int)(WorldPosition.X * 32),
+                (int)(WorldPosition.Y * 32),
+                (int)((WorldPosition.X + Forward.X) * 32),
+                (int)((WorldPosition.Y + Forward.Y) * 32),
                 Color.WHITE
                 );
 
             Console.ForegroundColor = _color;
             Console.ForegroundColor = Game.DefaultColor;
             
-
-            if(LocalPosition.X >= 0 && LocalPosition.X < Console.WindowWidth 
-                && LocalPosition.Y >=0 && LocalPosition.Y < Console.WindowHeight)
+            //Checks to see if the game object is inside the bounds.
+            if(WorldPosition.X >= 0 && WorldPosition.X < Console.WindowWidth 
+                && WorldPosition.Y >=0 && WorldPosition.Y < Console.WindowHeight)
             {
-                Console.SetCursorPosition((int)LocalPosition.X, (int)LocalPosition.Y);
+                Console.SetCursorPosition((int)WorldPosition.X, (int)WorldPosition.Y);
                 Console.Write(_icon);
             }
 
