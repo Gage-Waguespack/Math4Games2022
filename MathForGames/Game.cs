@@ -156,11 +156,10 @@ namespace MathForGames
             
 
             player.AddChild(enemy);
+
+
             scene1.AddActor(enemy);
             scene1.AddActor(player);
-
-            scene2.AddActor(player);
-            scene2.AddActor(enemy);
 
             player.Speed = 5;
 

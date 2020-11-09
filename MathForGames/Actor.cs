@@ -185,6 +185,7 @@ namespace MathForGames
             }
         }
 
+
         public virtual void Update(float deltaTime)
         {
             UpdateTransform();
