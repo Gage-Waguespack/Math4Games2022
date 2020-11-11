@@ -28,7 +28,7 @@ namespace MathForGames
         {
             get 
             { 
-                return new Vector2(_localTransform.m11, _localTransform.m21); 
+                return new Vector2(_globalTransform.m11, _globalTransform.m21); 
             }
         }
 
@@ -154,25 +154,25 @@ namespace MathForGames
 
         public void SetTranslate(Vector2 position)
         {
-            _translation.m13 = position.X;
-            _translation.m23 = position.Y;
+            _translation = Matrix3.CreateTranslation(position);
         }
 
         public void SetRotation(float radians)
         {
-            _rotation.m11 = (float)Math.Cos(radians);
-            _rotation.m12 = (float)Math.Sin(radians);
-            _rotation.m21 = -(float)Math.Sin(radians);
-            _rotation.m22 = (float)Math.Cos(radians);
+            _rotation = Matrix3.CreateRotation(radians);
+        }
+
+        public void Rotate(float radians)
+        {
+            _rotation *= Matrix3.CreateRotation(radians);
         }
 
         public void SetScale(float x, float y)
         {
-            _scale.m11 = x;
-            _scale.m22 = y;
+            _scale = Matrix3.CreateScale(new Vector2(x, y));
         }
 
-        private void UpdateTransform()
+        private void UpdateTransforms()
         {
             _localTransform = _translation * _rotation * _scale;
             if (_parent == null)
@@ -188,7 +188,7 @@ namespace MathForGames
 
         public virtual void Update(float deltaTime)
         {
-            UpdateTransform();
+            UpdateTransforms();
             LocalPosition += _velocity * deltaTime;
         }
 

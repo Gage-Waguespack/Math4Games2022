@@ -153,8 +153,6 @@ namespace MathForGames
             player.SetRotation(1.5707f);
             enemy.SetRotation(-1.5707f);
 
-            
-
             player.AddChild(enemy);
 
 
