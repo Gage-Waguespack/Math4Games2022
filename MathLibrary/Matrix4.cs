@@ -57,10 +57,6 @@ namespace MathLibrary
                 );
         }
 
-        public static Vector4 operator *(Matrix4 lhs, Vector4 rhs)
-        {
-            return new Vector4();
-        }
         public static Matrix4 operator *(Matrix4 lhs, Matrix4 rhs)
         {
             return new Matrix4

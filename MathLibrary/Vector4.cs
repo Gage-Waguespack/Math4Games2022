@@ -7,22 +7,10 @@ namespace MathLibrary
 
     public class Vector4
     {
-        private float _w;
         private float _x;
         private float _y;
         private float _z;
-
-        public float W
-        {
-            get
-            {
-                return _w;
-            }
-            set
-            {
-                _w = value;
-            }
-        }
+        private float _w;
 
         public float X
         {
@@ -60,11 +48,23 @@ namespace MathLibrary
             }
         }
 
+        public float W
+        {
+            get
+            {
+                return _w;
+            }
+            set
+            {
+                _w = value;
+            }
+        }
+
         public float Magnitude
         {
             get
             {
-                return (float)Math.Sqrt(W * W + X * X + Y * Y + Z * Z);
+                return (float)Math.Sqrt(X * X + Y * Y + Z * Z + W * W);
             }
         }
 
@@ -80,18 +80,18 @@ namespace MathLibrary
 
         public Vector4()
         {
-            _w = 0;
             _x = 0;
             _y = 0;
             _z = 0;
+            _w = 0;
         }
 
-        public Vector4(float w, float x, float y, float z)
+        public Vector4(float x, float y, float z, float w)
         {
-            _w = w;
             _x = x;
             _y = y;
             _z = z;
+            _w = w;
         }
         public static Vector4 Normalize(Vector4 vector)
         {
@@ -102,7 +102,7 @@ namespace MathLibrary
         }
         public static float DotProduct(Vector4 lhs, Vector4 rhs)
         {
-            return (lhs.W * rhs.W) + (lhs.X * rhs.X) + (lhs.Y * rhs.Y) + (lhs.Z * rhs.Z);
+            return (lhs.X * rhs.X) + (lhs.Y * rhs.Y) + (lhs.Z * rhs.Z) + (lhs.W * rhs.W);
         }
         public static Vector4 CrossProduct(Vector4 lhs, Vector4 rhs)
         {
@@ -116,26 +116,35 @@ namespace MathLibrary
 
         public static Vector4 operator +(Vector4 lhs, Vector4 rhs)
         {
-            return new Vector4(lhs.W + rhs.W, lhs.X + rhs.X, lhs.Y + rhs.Y, lhs.Z + rhs.Z);
+            return new Vector4(lhs.X + rhs.X, lhs.Y + rhs.Y, lhs.Z + rhs.Z, lhs.W + rhs.W);
         }
 
         public static Vector4 operator -(Vector4 lhs, Vector4 rhs)
         {
-            return new Vector4(lhs.W - rhs.W, lhs.X - rhs.X, lhs.Y - rhs.Y, lhs.Z - rhs.Z);
+            return new Vector4(lhs.X - rhs.X, lhs.Y - rhs.Y, lhs.Z - rhs.Z, lhs.W - rhs.W);
         }
 
         public static Vector4 operator *(Vector4 lhs, float scaler)
         {
-            return new Vector4(lhs.W * scaler, lhs.X * scaler, lhs.Y * scaler, lhs.Z * scaler);
+            return new Vector4(lhs.X * scaler, lhs.Y * scaler, lhs.Z * scaler, lhs.W * scaler);
         }
         public static Vector4 operator *(float scaler, Vector4 lhs)
         {
-            return new Vector4(lhs.W * scaler, lhs.X * scaler, lhs.Y * scaler, lhs.Z * scaler);
+            return new Vector4(lhs.X * scaler, lhs.Y * scaler, lhs.Z * scaler, lhs.W * scaler);
+        }
+        public static Vector4 operator *(Matrix4 lhs, Vector4 rhs)
+        {
+            return new Vector4(
+                    lhs.m11 * rhs.X + lhs.m12 * rhs.Y + lhs.m13 * rhs.Z + lhs.m14 * rhs.W,
+                    lhs.m21 * rhs.X + lhs.m22 * rhs.Y + lhs.m23 * rhs.Z + lhs.m24 * rhs.W,
+                    lhs.m31 * rhs.X + lhs.m32 * rhs.Y + lhs.m33 * rhs.Z + lhs.m34 * rhs.W,
+                    lhs.m41 * rhs.X + lhs.m42 * rhs.Y + lhs.m43 * rhs.Z + lhs.m44 * rhs.W
+                    );
         }
 
         public static Vector4 operator /(Vector4 lhs, float scalar)
         {
-            return new Vector4(lhs.W / scalar, lhs.X / scalar, lhs.Y / scalar, lhs.Z / scalar);
+            return new Vector4(lhs.X / scalar, lhs.Y / scalar, lhs.Z / scalar, lhs.W / scalar);
         }
     }
 }
