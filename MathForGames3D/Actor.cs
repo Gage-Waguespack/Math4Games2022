@@ -39,11 +39,6 @@ namespace MathForGames3D
             {
                 return new Vector3(_globalTransform.m13, _globalTransform.m23, _globalTransform.m33).Normalized;
             }
-            //set
-            //{
-            //    Vector3 lookPosition = WorldPosition + value.Normalized;
-            //    LookAt(lookPosition);
-            //}
         }
 
         public Vector3 WorldPosition
@@ -264,36 +259,6 @@ namespace MathForGames3D
             _radians += radians;
             SetRotationY(_radians);
         }
-
-
-        /// <summary>
-        /// Rotates the actor to face the given position
-        /// </summary>
-        /// <param name="position">The position the actor should be facing</param>
-        //public void LookAt(Vector3 position)
-        //{
-        //    //Find the direction that the actor should look in
-        //    Vector3 direction = (position - WorldPosition).Normalized;
-
-        //    //Use the dotproduct to find the angle the actor needs to rotate
-        //    float dotProd = Vector3.DotProduct(Forward, direction);
-        //    if (Math.Abs(dotProd) > 1)
-        //        return;
-        //    float angle = (float)Math.Acos(dotProd);
-
-        //    //Find a perpindicular vector to the direction
-        //    Vector3 perp = new Vector3(direction.Y, -direction.X);
-
-        //    //Find the dot product of the perpindicular vector and the current forward
-        //    float perpDot = Vector3.DotProduct(perp, Forward);
-
-        //    //If the result isn't 0, use it to change the sign of the angle to be either positive or negative
-        //    if (perpDot != 0)
-        //        angle *= -perpDot / Math.Abs(perpDot);
-
-        //    Rotate(angle);
-        //}
-
         /// <summary>
         /// Updates the actors forward vector to be
         /// the last direction it moved in
