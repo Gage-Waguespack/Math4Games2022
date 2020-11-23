@@ -10,6 +10,7 @@ namespace MathForGames
     class Actor
     {
         protected char _icon = ' ';
+        private Sprite _sprite;
         private Vector2 _velocity = new Vector2();
         protected Vector2 acceleration = new Vector2();
         protected Matrix3 _globalTransform = new Matrix3();

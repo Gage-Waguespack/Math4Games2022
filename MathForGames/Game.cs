@@ -9,16 +9,7 @@ using Raylib_cs;
 namespace MathForGames
 {
     /// <summary>
-    /// I want to make a game that has the player choose a difficulty, either easy, medium, or large.
-    /// After that I'd want each difficulty to have different amounts of enemies and I want the player
-    /// to be able to walk over an enemy and for that enemy to disappear. If there are multiple enemies
-    /// in the same position and the player is there, I want the game to end (the player will lose) 
-    /// and if the player walks over just one enemy, I want the enemy to disappear and if the player
-    /// gets rid of the all, they win.
-    /// Things I'm going to need:
-    /// - An enemy class that hold the variables for the enemies (including their movements).
-    /// - A way for the player to lose via multiple enemies.
-    /// - A way for the player to win after there are no enemies being detected.
+    /// Making a crossyroad type game where the player has to survive on the road for as long as possible
     /// </summary>
     class Game
     {
@@ -141,6 +132,10 @@ namespace MathForGames
             Scene scene1 = new Scene();
             Scene scene2 = new Scene();
 
+            World background = new World(16, 12, '#', ConsoleColor.White);
+
+            background.SetScale(35f, 30f);
+
             //Creates Enemies in the game that the player should dodge
             //Enemy enemy = new Enemy(15, 3, Color.RED, '■', ConsoleColor.Magenta);
             Player player = new Player(15, 11, Color.BLUE, '@', ConsoleColor.Cyan);
@@ -156,6 +151,7 @@ namespace MathForGames
             //player.AddChild(enemy);
 
             //scene1.AddActor(enemy);
+            scene1.AddActor(background);
             scene1.AddActor(player);
 
             player.Speed = 5;
