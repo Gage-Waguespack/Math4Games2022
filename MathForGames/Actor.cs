@@ -109,12 +109,6 @@ namespace MathForGames
             _rayColor = rayColor;
         }
 
-        public bool CheckCollision(Actor other)
-        {
-            other.WorldPosition - WorldPosition 
-            return false;
-        }
-
         public bool AddChild(Actor child)
         {
             if (child == null)
@@ -172,6 +166,11 @@ namespace MathForGames
         /// <returns></returns>
         public bool CheckCollision(Actor other)
         {
+            float distance = (other.WorldPosition - WorldPosition).Magnitude;
+            if(distance <= other._collisionRadius + _collisionRadius)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -214,7 +213,7 @@ namespace MathForGames
             }
             else
             {
-                _globalTransform = _localTransform * _parent._globalTransform; 
+                _globalTransform = _parent._globalTransform * _localTransform; 
             }
         }
 
@@ -223,13 +222,15 @@ namespace MathForGames
         {
             UpdateTransforms();
 
-            Velocity += acceleration;
+            /*Velocity += acceleration;
 
             if (Velocity.Magnitude > MaxSpeed)
                 Velocity = Velocity.Normalized * MaxSpeed;
 
             //Increase position by the current velocity
-            LocalPosition += _velocity * deltaTime;
+            LocalPosition += _velocity * deltaTime;*/
+
+            Rotate((float)Math.PI / 16 * deltaTime);
         }
 
         public virtual void Draw()
