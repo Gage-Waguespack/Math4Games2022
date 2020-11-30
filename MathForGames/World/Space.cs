@@ -6,20 +6,20 @@ using MathLibrary;
 
 namespace MathForGames
 {
-    class Grass : Actor
+    class Space : Actor
     {
         private Sprite _sprite;
 
-        public Grass(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.White)
+        public Space(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : base(x, y, icon, color)
         {
-            _sprite = new Sprite("Images/grass-top-down.png");
+            _sprite = new Sprite("Images/space.png");
         }
 
-        public Grass(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.Magenta)
+        public Space(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.Magenta)
             : base(x, y, rayColor, icon, color)
         {
-            _sprite = new Sprite("Images/grass-top-down.png");
+            _sprite = new Sprite("Images/space.png");
         }
 
         public override void Draw()

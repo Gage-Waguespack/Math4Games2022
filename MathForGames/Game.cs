@@ -132,8 +132,7 @@ namespace MathForGames
             Scene scene1 = new Scene();
             Scene scene2 = new Scene();
 
-            Grass background = new Grass(16, 12, '#', ConsoleColor.White);
-            RoadNsLeft roadLeft = new RoadNsLeft(12, 12, ' ', ConsoleColor.White);
+            Space background = new Space(16, 12, '#', ConsoleColor.White);
 
             background.SetScale(35f, 30f);
 
@@ -153,7 +152,6 @@ namespace MathForGames
 
             //scene1.AddActor(enemy);
             scene1.AddActor(background);
-            scene1.AddActor(roadLeft);
             scene1.AddActor(player);
 
             player.Speed = 5;

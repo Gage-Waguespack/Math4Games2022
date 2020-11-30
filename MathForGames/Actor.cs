@@ -109,6 +109,12 @@ namespace MathForGames
             _rayColor = rayColor;
         }
 
+        public bool CheckCollision(Actor other)
+        {
+            other.WorldPosition - WorldPosition 
+            return false;
+        }
+
         public bool AddChild(Actor child)
         {
             if (child == null)
