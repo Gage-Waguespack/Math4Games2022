@@ -6,17 +6,17 @@ using MathLibrary;
 
 namespace MathForGames
 {
-    class World : Actor
+    class Grass : Actor
     {
         private Sprite _sprite;
 
-        public World(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.White)
+        public Grass(float x, float y, char icon = ' ', ConsoleColor color = ConsoleColor.White)
             : base(x, y, icon, color)
         {
             _sprite = new Sprite("Images/grass-top-down.png");
         }
 
-        public World(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.Magenta)
+        public Grass(float x, float y, Color rayColor, char icon = ' ', ConsoleColor color = ConsoleColor.Magenta)
             : base(x, y, rayColor, icon, color)
         {
             _sprite = new Sprite("Images/grass-top-down.png");
