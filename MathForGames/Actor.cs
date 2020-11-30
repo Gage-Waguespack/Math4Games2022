@@ -222,15 +222,14 @@ namespace MathForGames
         {
             UpdateTransforms();
 
-            /*Velocity += acceleration;
+            Velocity += acceleration;
 
             if (Velocity.Magnitude > MaxSpeed)
                 Velocity = Velocity.Normalized * MaxSpeed;
 
             //Increase position by the current velocity
-            LocalPosition += _velocity * deltaTime;*/
+            LocalPosition += _velocity * deltaTime;
 
-            Rotate((float)Math.PI / 16 * deltaTime);
         }
 
         public virtual void Draw()
