@@ -44,6 +44,11 @@ namespace MathForGames
             int yVelocity = -Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_W))
                 + Convert.ToInt32(Game.GetKeyDown((int)KeyboardKey.KEY_S));
 
+            if (Game.GetKeyDown((int)KeyboardKey.KEY_UP))
+            {
+                Bullet bullet = new Bullet(WorldPosition + Forward, Forward,Color.WHITE, "@", )
+            }
+
             Acceleration = new Vector2(xVelocity, yVelocity);
             //Velocity = Velocity.Normalized * Speed;
 

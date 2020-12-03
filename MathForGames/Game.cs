@@ -132,26 +132,86 @@ namespace MathForGames
             Scene scene1 = new Scene();
             Scene scene2 = new Scene();
 
-            Space background = new Space(16, 12, '#', ConsoleColor.White);
+            Space background = new Space(16, 12, ' ', ConsoleColor.White);
 
             background.SetScale(35f, 30f);
 
             //Creates Enemies in the game that the player should dodge
-            //Enemy enemy = new Enemy(4, 0, Color.RED, '■', ConsoleColor.Magenta);
-            Player player = new Player(15, 11, Color.BLUE, '@', ConsoleColor.Cyan);
+            Enemy enemy = new Enemy(15, 4, Color.RED, '■', ConsoleColor.Magenta);
+            Enemy enemy1 = new Enemy(5, 4, Color.RED, '■', ConsoleColor.Magenta);
+            Enemy enemy2 = new Enemy(10, 4, Color.RED, '■', ConsoleColor.Magenta);
+            Enemy enemy3 = new Enemy(20, 4, Color.RED, '■', ConsoleColor.Magenta);
+            Enemy enemy4 = new Enemy(25, 4, Color.RED, '■', ConsoleColor.Magenta);
+            Enemy enemy5 = new Enemy(12, 6, Color.RED, '■', ConsoleColor.Magenta);
+            Enemy enemy6 = new Enemy(13, 6, Color.RED, '■', ConsoleColor.Magenta);
+            Enemy enemy7 = new Enemy(17, 6, Color.RED, '■', ConsoleColor.Magenta);
+            Enemy enemy8 = new Enemy(18, 6, Color.RED, '■', ConsoleColor.Magenta);
+            Enemy enemy9 = new Enemy(8, 6, Color.RED, '■', ConsoleColor.Magenta);
+            Enemy enemy10 = new Enemy(7, 6, Color.RED, '■', ConsoleColor.Magenta);
+            Enemy enemy11 = new Enemy(22, 6, Color.RED, '■', ConsoleColor.Magenta);
+            Enemy enemy12 = new Enemy(23, 6, Color.RED, '■', ConsoleColor.Magenta);
+            Enemy enemy13 = new Enemy(3, 6, Color.RED, '■', ConsoleColor.Magenta);
+            Enemy enemy14 = new Enemy(27, 6, Color.RED, '■', ConsoleColor.Magenta);
+            Player player = new Player(15, 22, Color.BLUE, '@', ConsoleColor.Cyan);
 
             player.SetScale(1f, 1f);
-            //enemy.SetScale(1f, 1f);
+            enemy.SetScale(1f, 1f);
 
-            //enemy.Target = player;
+            //gives the actor a specified target
+            enemy.Target = player;
+            enemy1.Target = player;
+            enemy2.Target = player;
+            enemy3.Target = player;
+            enemy4.Target = player;
+            enemy5.Target = player;
+            enemy6.Target = player;
+            enemy7.Target = player;
+            enemy8.Target = player;
+            enemy9.Target = player;
+            enemy10.Target = player;
+            enemy11.Target = player;
+            enemy12.Target = player;
+            enemy13.Target = player;
+            enemy14.Target = player;
 
+            //sets the rotation of an actor in radians
             player.SetRotation(1.5707f);
+            enemy.SetRotation(-1.5707f);
+            enemy1.SetRotation(-1.5707f);
+            enemy2.SetRotation(-1.5707f);
+            enemy3.SetRotation(-1.5707f);
+            enemy4.SetRotation(-1.5707f);
+            enemy5.SetRotation(-1.5707f);
+            enemy6.SetRotation(-1.5707f);
+            enemy7.SetRotation(-1.5707f);
+            enemy8.SetRotation(-1.5707f);
+            enemy9.SetRotation(-1.5707f);
+            enemy10.SetRotation(-1.5707f);
+            enemy11.SetRotation(-1.5707f);
+            enemy12.SetRotation(-1.5707f);
+            enemy13.SetRotation(-1.5707f);
+            enemy14.SetRotation(-1.5707f);
 
             //player.AddChild(enemy);
 
+            //Adds the actors to the specified scene
             scene1.AddActor(background);
             scene1.AddActor(player);
-            //scene1.AddActor(enemy);
+            scene1.AddActor(enemy);
+            scene1.AddActor(enemy1);
+            scene1.AddActor(enemy2);
+            scene1.AddActor(enemy3);
+            scene1.AddActor(enemy4);
+            scene1.AddActor(enemy5);
+            scene1.AddActor(enemy6);
+            scene1.AddActor(enemy7);
+            scene1.AddActor(enemy8);
+            scene1.AddActor(enemy9);
+            scene1.AddActor(enemy10);
+            scene1.AddActor(enemy11);
+            scene1.AddActor(enemy12);
+            scene1.AddActor(enemy13);
+            scene1.AddActor(enemy14);
 
             player.Speed = 5;
 
