@@ -10,6 +10,7 @@ namespace MathForGames
     {
         private float _speed = 1;
         private Sprite _sprite;
+        private Laser _laser;
 
         public float Speed
         {
@@ -35,6 +36,14 @@ namespace MathForGames
             _sprite = new Sprite("Images/player.png");
         }
 
+        public void CreateProjectile(Laser laser)
+        {
+            _laser = laser;
+            Scene scene = Game.GetScene(Game.CurrentSceneIndex);
+            scene.AddActor(_laser);
+            laser.Velocity = (Forward * _laser.Speed).Normalized * 3;
+        }
+
         public override void Update(float deltaTime)
         {
 
@@ -46,7 +55,8 @@ namespace MathForGames
 
             if (Game.GetKeyDown((int)KeyboardKey.KEY_UP))
             {
-                Bullet bullet = new Bullet(WorldPosition + Forward, Forward,Color.WHITE, "@", )
+                Laser bullet = new Laser(WorldPosition + Forward, Forward, Color.WHITE, '@', ConsoleColor.White);
+                CreateProjectile(bullet);
             }
 
             Acceleration = new Vector2(xVelocity, yVelocity);

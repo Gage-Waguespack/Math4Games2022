@@ -23,6 +23,7 @@ namespace MathForGames
         protected Actor _parent;
         protected Actor[] _children = new Actor[0];
         private float _collisionRadius;
+        private float _speed = 1;
         private float _maxSpeed = 5;
 
         public bool Started { get; private set; }
@@ -90,6 +91,18 @@ namespace MathForGames
             set
             {
                 _maxSpeed = value;
+            }
+        }
+
+        public float Speed
+        {
+            get
+            {
+                return _speed;
+            }
+            set
+            {
+                _speed = value;
             }
         }
 
