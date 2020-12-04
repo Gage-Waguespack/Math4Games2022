@@ -221,8 +221,7 @@ namespace MathForGames
             AddScene(scene2);
 
             SetCurrentScene(startingSceneIndex);
-
-
+            
         }
 
 

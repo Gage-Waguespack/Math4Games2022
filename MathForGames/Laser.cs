@@ -22,5 +22,13 @@ namespace MathForGames
             _position = position;
             _direction = direction;
         }
+
+        public virtual void OnCollision(Actor other)
+        {
+            if (other is Actor)
+            {
+                Death(other);
+            }
+        }
     }
 }

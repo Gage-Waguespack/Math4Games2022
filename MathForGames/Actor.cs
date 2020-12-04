@@ -20,11 +20,14 @@ namespace MathForGames
         private Matrix3 _scale = new Matrix3();
         protected ConsoleColor _color;
         protected Color _rayColor;
+        public static Actor[] _actors;
+        protected Actor _actor;
         protected Actor _parent;
         protected Actor[] _children = new Actor[0];
         private float _collisionRadius;
         private float _speed = 1;
         private float _maxSpeed = 5;
+        private bool _alive = true;
 
         public bool Started { get; private set; }
 
@@ -167,6 +170,39 @@ namespace MathForGames
             return childRemoved;
         }
 
+        public bool RemoveActor(Actor actor)
+        {
+            if (actor == null)
+            {
+                return false;
+            }
+            bool actorRemoved = false;
+
+            Actor[] newArray = new Actor[_actors.Length - 1];
+
+            int j = 0;
+
+            for (int i = 0; i < _actors.Length; i++)
+            {
+                if (actor != _actors[i])
+                {
+                    newArray[j] = _actors[i];
+                    j++;
+                }
+                else
+                {
+                    actorRemoved = true;
+                    if (actor.Started)
+                    {
+                        actor.End();
+                    }
+                }
+            }
+            _actors = newArray;
+
+            return actorRemoved;
+        }
+
         public virtual void Start()
         {
             Started = true;
@@ -194,7 +230,15 @@ namespace MathForGames
         /// <param name="other"></param>
         public virtual void OnCollision(Actor other)
         {
+            if (other is Actor)
+            {
+                Death(other);
+            }
+        }
 
+        public void Death(Actor actor)
+        {
+            RemoveActor(actor);
         }
 
         public void SetTranslate(Vector2 position)
@@ -242,6 +286,11 @@ namespace MathForGames
 
             //Increase position by the current velocity
             LocalPosition += _velocity * deltaTime;
+
+            if(_alive == false)
+            {
+                
+            }
 
         }
 

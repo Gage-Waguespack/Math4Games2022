@@ -11,6 +11,7 @@ namespace MathForGames
         private float _speed = 1;
         private Sprite _sprite;
         private Laser _laser;
+        private bool _alive = true;
 
         public float Speed
         {
@@ -44,6 +45,47 @@ namespace MathForGames
             laser.Velocity = (Forward * _laser.Speed).Normalized * 3;
         }
 
+        public virtual void OnCollision(Actor other)
+        {
+            if (other is Actor)
+            {
+                Death(other);
+            }
+        }
+
+        public bool RemoveActor(int index)
+        {
+            if (index < 0 || index >= _actors.Length)
+            {
+                return false;
+            }
+            bool actorRemoved = false;
+
+            Actor[] tempArray = new Actor[_actors.Length - 1];
+
+            int j = 0;
+            for (int i = 0; i < _actors.Length; i++)
+            {
+                if (i != index)
+                {
+                    tempArray[i] = _actors[i];
+                    j++;
+                }
+                else
+                {
+                    actorRemoved = true;
+                    if (_actors[i].Started)
+                    {
+                        _actors[i].End();
+                    }
+                }
+            }
+            _actors = tempArray;
+
+            return actorRemoved;
+        }
+        
+
         public override void Update(float deltaTime)
         {
 
@@ -55,7 +97,7 @@ namespace MathForGames
 
             if (Game.GetKeyDown((int)KeyboardKey.KEY_UP))
             {
-                Laser bullet = new Laser(WorldPosition + Forward, Forward, Color.WHITE, '@', ConsoleColor.White);
+                Laser bullet = new Laser(WorldPosition + Forward, Forward, Color.WHITE, '*', ConsoleColor.White);
                 CreateProjectile(bullet);
             }
 

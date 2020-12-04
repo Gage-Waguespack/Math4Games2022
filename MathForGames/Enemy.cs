@@ -11,6 +11,8 @@ namespace MathForGames
         private Actor _target;
         private Color _alertColor;
         private Sprite _sprite;
+        private Laser _laser;
+        private bool _alive = true;
 
         public Actor Target
         {
@@ -30,6 +32,14 @@ namespace MathForGames
             _sprite = new Sprite("Images/enemy.png");
         }
 
+        public void CreateProjectile(Laser laser)
+        {
+            _laser = laser;
+            Scene scene = Game.GetScene(Game.CurrentSceneIndex);
+            scene.AddActor(_laser);
+            laser.Velocity = (Forward * _laser.Speed).Normalized * 3;
+        }
+
         public bool CheckTargetInSight(float maxAngle, float maxDistance)
         {
             if (Target == null)
@@ -47,11 +57,55 @@ namespace MathForGames
             return false;
         }
 
+        public virtual void OnCollision(Actor other)
+        {
+            if (other is Actor)
+            {
+                Death(other);
+            }
+        }
+
+        public bool RemoveActor(int index)
+        {
+            if (index < 0 || index >= _actors.Length)
+            {
+                return false;
+            }
+            bool actorRemoved = false;
+
+            Actor[] tempArray = new Actor[_actors.Length - 1];
+
+            int j = 0;
+            for (int i = 0; i < _actors.Length; i++)
+            {
+                if (i != index)
+                {
+                    tempArray[i] = _actors[i];
+                    j++;
+                }
+                else
+                {
+                    actorRemoved = true;
+                    if (_actors[i].Started)
+                    {
+                        _actors[i].End();
+                    }
+                }
+            }
+            _actors = tempArray;
+
+            return actorRemoved;
+        }
+
         public override void Update(float deltaTime)
         {
             if(CheckTargetInSight(0.125f, 20))
             {
                 _rayColor = Color.RED;
+
+                //If the player is in the sights of the enemy then the enemy will shoot
+                Laser bullet = new Laser(WorldPosition + Forward, Forward, Color.WHITE, '*', ConsoleColor.White);
+                CreateProjectile(bullet);
             }
             else
             {
